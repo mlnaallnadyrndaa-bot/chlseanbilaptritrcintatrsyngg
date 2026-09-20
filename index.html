@@ -3,47 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Chelsea! 💖</title>
+    <title>Happy 18th Birthday Chelsea! 💖</title>
     <style>
-        body {
-            margin: 0; padding: 0;
-            background: linear-gradient(to bottom, #ffe3e3, #fff0f5);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #4a4a4a;
-            display: flex; flex-direction: column; align-items: center;
-            overflow-x: hidden; text-align: center; min-height: 100vh;
-        }
-        .welcome-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffe3e3; z-index: 9999;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease;
-        }
-        .container {
-            max-width: 600px; padding: 20px; margin-top: 50px; z-index: 2;
-            display: none;
-        }
-        h1 { color: #ff6b81; font-size: 2.3rem; text-shadow: 2px 2px #fff; animation: bounce 2s infinite; margin: 10px; }
-        p { font-size: 1.1rem; line-height: 1.6; padding: 0 10px; }
-        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        .cake-container { margin: 30px auto; position: relative; width: 150px; height: 150px; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
-        .cake { width: 140px; height: 90px; background: #ffb3c1; border-radius: 15px 15px 10px 10px; position: relative; box-shadow: 0 6px #ff8fa3; }
-        .cake::before { content: ''; position: absolute; width: 140px; height: 25px; background: #ffe5ec; border-radius: 15px 15px 0 0; top: 0; left: 0; }
-        .candle { width: 12px; height: 35px; background: linear-gradient(to bottom, #ff4d6d, #fff); position: absolute; top: 15px; left: 64px; border-radius: 3px 3px 0 0; }
-        .flame { width: 14px; height: 20px; background: #ffb703; border-radius: 50%; position: absolute; top: -20px; left: -1px; animation: flicker 0.5s infinite alternate; box-shadow: 0 0 10px #ffb703; }
-        @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
-        .hint { font-size: 0.9rem; color: #888; font-style: italic; margin-top: 5px; }
-        .balloon-zone { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
-        .balloon { position: absolute; width: 50px; height: 65px; bottom: -100px; cursor: pointer; pointer-events: auto; animation: floatUp 6s linear forwards; display: flex; justify-content: center; align-items: center; user-select: none; }
-        .balloon::after { content: '🎈'; position: absolute; font-size: 2.5rem; z-index: -1; }
-        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-120vh) rotate(10deg); opacity: 0; } }
-        .btn-love, .btn-start { background-color: #ff6b81; color: white; border: none; padding: 12px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 30px; cursor: pointer; box-shadow: 0 5px #ff4757; transition: all 0.2s; margin: 15px 0; }
-        .btn-love:active, .btn-start:active { transform: translateY(4px); box-shadow: 0 1px #ff4757; }
-        .letter-box { max-height: 0; overflow: hidden; background: white; border-radius: 15px; padding: 0 20px; margin-top: 15px; transition: max-height 0.5s ease-out, padding 0.5s ease-out; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        .letter-box.open { max-height: 600px; padding: 20px; }
-        .heart-pop { position: fixed; font-size: 1.5rem; pointer-events: none; animation: popHer 1s ease-out forwards; z-index: 999; }
-        @keyframes popHer { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; } 100% { transform: translate(-50%, -150%) scale(1.5); opacity: 0; } }
-        .music-control { position: fixed; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.9); padding: 8px 12px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: none; }
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; background: linear-gradient(135deg, #ffe3e3, #fff0f5, #ffdee9); font-family: 'Segoe UI', sans-serif; color: #4a4a4a; overflow: hidden; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
+        
+        .page { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; opacity: 0; pointer-events: none; transform: translateX(50px); transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1); z-index: 5; }
+        .page.active { opacity: 1; pointer-events: auto; transform: translateX(0); }
+        
+        .bg-decorations { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .floating-heart { position: absolute; font-size: 1.5rem; animation: floatUpward 5s linear infinite; opacity: 0.6; }
+        @keyframes floatUpward { 0% { transform: translateY(105vh) rotate(0deg) scale(0.8); opacity: 0.6; } 100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; } }
+        
+        .card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(8px); padding: 30px 25px; border-radius: 24px; box-shadow: 0 10px 30px rgba(255, 107, 129, 0.15); border: 2px solid #fff; max-width: 450px; width: 100%; animation: floatingCard 4s ease-in-out infinite; }
+        @keyframes floatingCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        
+        h1, h2 { color: #ff6b81; text-shadow: 1px 1px #fff; margin-bottom: 15px; }
+        p { font-size: 1.05rem; line-height: 1.6; margin-bottom: 20px; }
+        
+        .btn-cute { background: #ff6b81; color: white; border: none; padding: 12px 35px; font-size: 1.1rem; font-weight: bold; border-radius: 50px; cursor: pointer; box-shadow: 0 5px #ff4757; transition: all 0.2s; z-index: 10; margin-top: 10px; }
+        .btn-cute:active { transform: translateY(4px); box-shadow: 0 1px #ff4757; }
+        
+        #page1 { background: #ffe3e3; transform: none; opacity: 1; pointer-events: auto; }
+        
+        .cake-box { margin: 20px auto; width: 140px; height: 130px; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; cursor: pointer; }
+        .cake { width: 130px; height: 80px; background: #ffb3c1; border-radius: 15px 15px 10px 10px; position: relative; box-shadow: 0 6px #ff8fa3; }
+        .cake::before { content: ''; position: absolute; width: 130px; height: 25px; background: #ffe5ec; border-radius: 15px 15px 0 0; top: 0; }
+        .candle { width: 10px; height: 35px; background: linear-gradient(to bottom, #ff4d6d, #fff); position: absolute; top: 15px; left: 60px; border-radius: 3px; }
+        .flame { width: 14px; height: 18px; background: #ffb703; border-radius: 50%; position: absolute; top: -18px; left: -2px; animation: flicker 0.4s infinite alternate; box-shadow: 0 0 8px #ffb703; }
+        @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.15) rotate(3deg); } }
+        
+        .age-badge { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); background: #ff4d6d; color: white; font-weight: bold; padding: 2px 10px; border-radius: 10px; font-size: 0.9rem; z-index: 6; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        
+        .gallery { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 15px; margin-bottom: 15px; }
+        .polaroid { background: white; padding: 8px 8px 20px 8px; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 105px; transform: rotate(-3deg); transition: transform 0.3s; }
+        .polaroid:nth-child(2) { transform: rotate(5deg); }
+        .polaroid:nth-child(3) { transform: rotate(-2deg); }
+        .polaroid:hover { transform: scale(1.1) rotate(0deg); z-index: 10; }
+        .photo-placeholder { width: 100%; height: 95px; background: #eee; border-radius: 2px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; }
+        .caption { font-size: 0.75rem; margin-top: 6px; font-family: 'Courier New', monospace; font-weight: bold; }
+        
+        #gameCanvas { background: #fffdfd; border: 2px dashed #ffb3c1; border-radius: 15px; width: 100%; height: 180px; position: relative; overflow: hidden; margin-bottom: 15px; }
+        .basket { width: 50px; height: 25px; background: #ff6b81; border-radius: 0 0 15px 15px; position: absolute; bottom: 5px; left: 50%; transform: translateX(-50%); transition: left 0.1s ease-out; display: flex; justify-content: center; align-items: center; color: white; font-size: 0.7rem; font-weight: bold; }
+        .falling-heart { position: absolute; font-size: 1.4rem; top: -30px; animation: dropHeart 2.5s linear forwards; }
+        @keyframes dropHeart { 0% { top: -30px; } 100% { top: 190px; } }
+        
+        .music-tag { position: fixed; top: 15px; right: 15px; background: rgba(255,255,255,0.9); padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: none; }
+        .click-pop { position: fixed; font-size: 1.5rem; pointer-events: none; animation: burst 0.8s ease-out forwards; z-index: 999; }
+        @keyframes burst { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; } 100% { transform: translate(-50%, -130%) scale(1.4); opacity: 0; } }
     </style>
 </head>
 <body>
@@ -52,113 +59,72 @@
         <source src="https://soundhelix.com" type="audio/mp3">
     </audio>
 
-    <div class="welcome-overlay" id="welcomeOverlay">
-        <h2 style="color: #ff6b81; margin-bottom: 25px; padding: 0 20px;">Hai Chelsea Nabila Putri, Ada Kejutan Buat Kamu! 🥰</h2>
-        <button class="btn-start" onclick="startSurprise()">Mulai Kejutan 🎵</button>
+    <div class="music-tag" id="musicTag" onclick="toggleMusic()">🔊 Musik: ON</div>
+    <div class="bg-decorations" id="bgDecorations"></div>
+
+    <!-- HALAMAN 1: Pembuka / Welcome -->
+    <div class="page active" id="page1">
+        <div class="card">
+            <h2>Hai Cantik... 🥰</h2>
+            <p>Ada sebuah kejutan kecil berantai yang udah disiapin khusus buat nemenin hari lahirmu. Ketuk tombol di bawah buat mulai ceritanya ya!</p>
+            <button class="btn-cute" onclick="nextPage(2, true)">Buka Kejutan 🎵</button>
+        </div>
     </div>
 
-    <div class="music-control" id="musicControl" onclick="toggleMusic()">🔊 Musik: ON</div>
-    <div class="balloon-zone" id="balloonZone"></div>
+    <!-- HALAMAN 2: Countdown / Tebakan -->
+    <div class="page" id="page2">
+        <div class="card">
+            <h2>Eh Sebentar... 🤔</h2>
+            <p>Kamu tahu nggak sih kalau hari ini tuh hari yang paling bersejarah dan paling indah di hidup aku?</p>
+            <p style="font-weight: bold; color: #ff6b81; font-size: 1.2rem;">Mau tahu kenapa? 😉</p>
+            <button class="btn-cute" onclick="nextPage(3)">Cari Tahu! 👉</button>
+        </div>
+    </div>
 
-    <div class="container" id="mainContainer">
-        <h1>Happy Birthday, Chelsea! 💖</h1>
-        <p>Hari ini adalah hari yang paling spesial karena orang favoritku lahir ke dunia. ✨</p>
-
-        <div class="cake-container" onclick="blowCandle()">
-            <div class="cake">
-                <div class="candle" id="candle"><div class="flame" id="flame"></div></div>
+    <!-- HALAMAN 3: Kue Ulang Tahun & Tiup Lilin -->
+    <div class="page" id="page3">
+        <div class="card">
+            <h1>Happy 18th Birthday, Chelsea! 💖</h1>
+            <p>Karena hari ini orang paling baik dan paling kusayangi resmi menginjak umur 18 tahun! Selamat ulang tahun sayang.</p>
+            <div class="cake-box" onclick="blowCandle()">
+                <div class="age-badge" id="ageBadge">18</div>
+                <div class="cake"><div class="candle" id="candle"><div class="flame" id="flame"></div></div></div>
             </div>
-        </div>
-        <p class="hint" style="margin-top: -15px;">Tap kuenya buat tiup lilin! 🎂</p>
-
-        <p id="cakeText" style="font-weight: bold; color: #ff4757; min-height: 24px; margin: 10px 0;"></p>
-        <p class="hint">Tips: Klik/tap balon-balon yang lewat untuk meletuskannya! 🎈</p>
-
-        <button class="btn-love" onclick="toggleLetter()">Klik Ini Buat Buka Surat 💌</button>
-        
-        <div class="letter-box" id="letterBox">
-            <h3>Dear Chelsea Nabila Putri, 💕</h3>
-            <p>Selamat ulang tahun ya sayang! Terima kasih sudah hadir dan selalu bikin hari-hariku jadi lebih berwarna. Aku bersyukur banget bisa punya kamu.</p>
-            <p>Semoga di umur yang baru ini, kamu selalu diberikan kesehatan, kebahagiaan, dan semua impian kamu bisa tercapai. Aku akan selalu ada di sini buat dukung kamu. 🌸</p>
-            <p style="font-weight: bold; text-align: right; margin-top: 15px;">— Pacar Tersayangmu 🥰</p>
+            <p class="hint" id="cakeText">Ayo buat permohonan, terus tap kuenya buat tiup lilinnya! 🎂</p>
+            <button class="btn-cute" id="nextFromCake" onclick="nextPage(4)" style="display:none; margin-top:15px;">Lihat Foto Kita 📸</button>
         </div>
     </div>
 
-    <script>
-        const music = document.getElementById('bgMusic');
+    <!-- HALAMAN 4: Galeri Foto Polaroid -->
+    <div class="page" id="page4">
+        <div class="card">
+            <h2>Our Little Memories 🌸</h2>
+            <p>Setiap momen bareng kamu adalah bagian terfavorit di dalam hidup aku. Selamanya bakal selalu begini.</p>
+            <div class="gallery">
+                <div class="polaroid"><div class="photo-placeholder">🥰</div><div class="caption">Sweet 18</div></div>
+                <div class="polaroid"><div class="photo-placeholder">👩‍❤️‍👨</div><div class="caption">Kita Berdua</div></div>
+                <div class="polaroid"><div class="photo-placeholder">👑</div><div class="caption">My Princess</div></div>
+            </div>
+            <p class="hint">Tips: Coba senggol atau tap foto polaroidnya, mereka bisa bergoyang! ✨</p>
+            <button class="btn-cute" onclick="nextPage(5); startMiniGame();">Main Game Yuk 🎮</button>
+        </div>
+    </div>
 
-                function startSurprise() {
-            document.getElementById('welcomeOverlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('welcomeOverlay').style.display = 'none';
-                document.getElementById('mainContainer').style.display = 'block';
-                document.getElementById('musicControl').style.display = 'block';
-                
-                setInterval(createBalloon, 1500);
-                makeHearts(10);
-                
-                music.play().catch(error => {
-                    console.log("Musik diblokir otomatis oleh browser.");
-                    document.getElementById('musicControl').innerText = '🔇 Musik: OFF';
-                });
-            }, 500);
-        }
+    <!-- HALAMAN 5: Mini-Game Tangkap Cinta -->
+    <div class="page" id="page5">
+        <div class="card">
+            <h2>Game Tangkap Cinta 💖</h2>
+            <p>Bantu tampung semua rasa cintaku! Geser mangkok atau ketuk kanan/kiri layar buat nangkep hati jatuh.</p>
+            <div id="gameCanvas" onclick="moveBasketManual(event)">
+                <div class="basket" id="basket">CHLSEA</div>
+            </div>
+            <p style="font-weight: bold; margin: 5px 0;">Skor Kamu: <span id="scoreNum" style="color:#ff6b81;">0</span> / 5</p>
+            <button class="btn-cute" id="nextFromGame" onclick="nextPage(6)" style="display:none;">Buka Surat Terakhir 💌</button>
+        </div>
+    </div>
 
-        function toggleMusic() {
-            const btn = document.getElementById('musicControl');
-            if (music.paused) { music.play(); btn.innerText = '🔊 Musik: ON'; } 
-            else { music.pause(); btn.innerText = '🔇 Musik: OFF'; }
-        }
-
-        let candleLit = true;
-        function blowCandle() {
-            if (candleLit) {
-                document.getElementById('flame').style.display = 'none';
-                document.getElementById('cakeText').innerText = 'Horeee! Selamat membuat permohonan! ✨🥳';
-                candleLit = false;
-                makeHearts(15);
-            } else {
-                document.getElementById('flame').style.display = 'block';
-                document.getElementById('cakeText').innerText = 'Lilinnya nyala lagi! Hehe 🕯️';
-                candleLit = true;
-            }
-        }
-
-        function toggleLetter() {
-            const letter = document.getElementById('letterBox');
-            letter.classList.toggle('open');
-            if(letter.classList.contains('open')) { makeHearts(10); }
-        }
-
-        function createBalloon() {
-            const zone = document.getElementById('balloonZone');
-            const balloon = document.createElement('div');
-            balloon.className = 'balloon';
-            balloon.style.left = Math.random() * 85 + 'vw';
-            balloon.style.animationDuration = Math.random() * 3 + 4 + 's'; 
-            balloon.onclick = (e) => { e.stopPropagation(); createPopText(e.clientX, e.clientY, '💥 POP! 🎉'); balloon.remove(); };
-            zone.appendChild(balloon);
-            setTimeout(() => balloon.remove(), 7000);
-        }
-
-        function createPopText(x, y, text) {
-            const pop = document.createElement('div');
-            pop.className = 'heart-pop'; pop.style.left = x + 'px'; pop.style.top = y + 'px'; pop.innerText = text;
-            document.body.appendChild(pop);
-            setTimeout(() => pop.remove(), 1000);
-        }
-
-        function makeHearts(count) {
-            const emojis = ['💖', '❤️', '🌸', '✨', '🥰'];
-            for(let i=0; i<count; i++) {
-                setTimeout(() => {
-                    const x = Math.random() * window.innerWidth;
-                    const y = Math.random() * window.innerHeight;
-                    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
-                    createPopText(x, y, emoji);
-                }, i * 100);
-            }
-        }
-    </script>
-</body>
-</html>
+    <!-- HALAMAN 6: Surat Cinta Penutup -->
+    <div class="page" id="page6">
+        <div class="card" style="max-height: 80vh; overflow-y: auto; text-align: left;">
+            <h3 style="color: #ff6b81; text-align: center; margin-top: 0;">Dear Chelsea Nabila Putri, 💕</h3>
+            <p>Selamat ulang tahun yang ke-18 ya sayang! Makasih banyak ya udah lahir ke dunia ini, udah hadir jadi penyemangat, dan selalu bikin hari-hariku penuh warna. Aku bersyukur banget bisa memiliki kamu di usiaku saat ini.</p>
