@@ -1,83 +1,117 @@
-    <!-- Musik Elemen (Menggunakan instrumen Happy Birthday kotak musik) -->
-    <audio id="bgMusic" loop>
-        <source src="https://mixkit.co" type="audio/wav">
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Chelsea! 💖</title>
+    <style>
+        body {
+            margin: 0; padding: 0;
+            background: linear-gradient(to bottom, #ffe3e3, #fff0f5);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #4a4a4a;
+            display: flex; flex-direction: column; align-items: center;
+            overflow-x: hidden; text-align: center; min-height: 100vh;
+        }
+        .welcome-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffe3e3; z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        .container {
+            max-width: 600px; padding: 20px; margin-top: 50px; z-index: 2;
+            display: none;
+        }
+        h1 { color: #ff6b81; font-size: 2.3rem; text-shadow: 2px 2px #fff; animation: bounce 2s infinite; margin: 10px; }
+        p { font-size: 1.1rem; line-height: 1.6; padding: 0 10px; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        .cake-container { margin: 30px auto; position: relative; width: 150px; height: 150px; cursor: pointer; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; }
+        .cake { width: 140px; height: 90px; background: #ffb3c1; border-radius: 15px 15px 10px 10px; position: relative; box-shadow: 0 6px #ff8fa3; }
+        .cake::before { content: ''; position: absolute; width: 140px; height: 25px; background: #ffe5ec; border-radius: 15px 15px 0 0; top: 0; left: 0; }
+        .candle { width: 12px; height: 35px; background: linear-gradient(to bottom, #ff4d6d, #fff); position: absolute; top: 15px; left: 64px; border-radius: 3px 3px 0 0; }
+        .flame { width: 14px; height: 20px; background: #ffb703; border-radius: 50%; position: absolute; top: -20px; left: -1px; animation: flicker 0.5s infinite alternate; box-shadow: 0 0 10px #ffb703; }
+        @keyframes flicker { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }
+        .hint { font-size: 0.9rem; color: #888; font-style: italic; margin-top: 5px; }
+        .balloon-zone { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .balloon { position: absolute; width: 50px; height: 65px; bottom: -100px; cursor: pointer; pointer-events: auto; animation: floatUp 6s linear forwards; display: flex; justify-content: center; align-items: center; user-select: none; }
+        .balloon::after { content: '🎈'; position: absolute; font-size: 2.5rem; z-index: -1; }
+        @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-120vh) rotate(10deg); opacity: 0; } }
+        .btn-love, .btn-start { background-color: #ff6b81; color: white; border: none; padding: 12px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 30px; cursor: pointer; box-shadow: 0 5px #ff4757; transition: all 0.2s; margin: 15px 0; }
+        .btn-love:active, .btn-start:active { transform: translateY(4px); box-shadow: 0 1px #ff4757; }
+        .letter-box { max-height: 0; overflow: hidden; background: white; border-radius: 15px; padding: 0 20px; margin-top: 15px; transition: max-height 0.5s ease-out, padding 0.5s ease-out; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .letter-box.open { max-height: 600px; padding: 20px; }
+        .heart-pop { position: fixed; font-size: 1.5rem; pointer-events: none; animation: popHer 1s ease-out forwards; z-index: 999; }
+        @keyframes popHer { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; } 100% { transform: translate(-50%, -150%) scale(1.5); opacity: 0; } }
+        .music-control { position: fixed; top: 15px; right: 15px; background: rgba(255, 255, 255, 0.9); padding: 8px 12px; border-radius: 20px; font-size: 0.9rem; cursor: pointer; z-index: 100; box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: none; }
+    </style>
+</head>
+<body>
+
+    <audio id="bgMusic" loop preload="auto">
         <source src="https://soundhelix.com" type="audio/mp3">
     </audio>
 
-    <!-- Tombol Masuk Pertama Kali (Pemicu Musik) -->
     <div class="welcome-overlay" id="welcomeOverlay">
-        <h2 style="color: #ff6b81; margin-bottom: 20px;">Hai Sayang, Ada Kejutan Buat Kamu! 🥰</h2>
+        <h2 style="color: #ff6b81; margin-bottom: 25px; padding: 0 20px;">Hai Chelsea Nabila Putri, Ada Kejutan Buat Kamu! 🥰</h2>
         <button class="btn-start" onclick="startSurprise()">Mulai Kejutan 🎵</button>
     </div>
 
-    <!-- Kontrol Tombol Musik Manual -->
     <div class="music-control" id="musicControl" onclick="toggleMusic()">🔊 Musik: ON</div>
-
     <div class="balloon-zone" id="balloonZone"></div>
 
     <div class="container" id="mainContainer">
-        <h1>Happy Birthday, Sayang! 💖</h1>
+        <h1>Happy Birthday, Chelsea! 💖</h1>
         <p>Hari ini adalah hari yang paling spesial karena orang favoritku lahir ke dunia. ✨</p>
 
-        <!-- Kue Interaktif -->
         <div class="cake-container" onclick="blowCandle()">
-            <div class="candle" id="candle">
-                <div class="flame" id="flame"></div>
+            <div class="cake">
+                <div class="candle" id="candle"><div class="flame" id="flame"></div></div>
             </div>
-            <div class="cake"></div>
-            <p class="hint">Tap kuenya buat tiup lilin! 🎂</p>
         </div>
+        <p class="hint" style="margin-top: -15px;">Tap kuenya buat tiup lilin! 🎂</p>
 
-        <p id="cakeText" style="font-weight: bold; color: #ff4757; min-height: 24px;"></p>
-
+        <p id="cakeText" style="font-weight: bold; color: #ff4757; min-height: 24px; margin: 10px 0;"></p>
         <p class="hint">Tips: Klik/tap balon-balon yang lewat untuk meletuskannya! 🎈</p>
 
-        <!-- Surat Tersembunyi -->
-        <button class="btn-love" onclick="toggleLetter()" style="margin-top: 20px;">Klik Ini Buat Buka Surat 💌</button>
+        <button class="btn-love" onclick="toggleLetter()">Klik Ini Buat Buka Surat 💌</button>
         
         <div class="letter-box" id="letterBox">
-            <h3>Dear Sayangku, 💕</h3>
-            <p>Selamat ulang tahun ya! Terima kasih sudah hadir dan selalu bikin hari-hariku jadi lebih berwarna. Aku bersyukur banget bisa punya kamu.</p>
+            <h3>Dear Chelsea Nabila Putri, 💕</h3>
+            <p>Selamat ulang tahun ya sayang! Terima kasih sudah hadir dan selalu bikin hari-hariku jadi lebih berwarna. Aku bersyukur banget bisa punya kamu.</p>
             <p>Semoga di umur yang baru ini, kamu selalu diberikan kesehatan, kebahagiaan, dan semua impian kamu bisa tercapai. Aku akan selalu ada di sini buat dukung kamu. 🌸</p>
-            <p style="font-weight: bold; text-align: right;">— Pacar Tersayangmu 🥰</p>
+            <p style="font-weight: bold; text-align: right; margin-top: 15px;">— Pacar Tersayangmu 🥰</p>
         </div>
     </div>
 
     <script>
         const music = document.getElementById('bgMusic');
 
-        // Fungsi Memulai Kejutan & Memutar Musik
         function startSurprise() {
+            music.play().then(() => {
+                lanjutkanKejutan();
+            }).catch(error => {
+                lanjutkanKejutan();
+            });
+        }
+
+        function melanjutkanKejutan() {
             document.getElementById('welcomeOverlay').style.opacity = '0';
             setTimeout(() => {
                 document.getElementById('welcomeOverlay').style.display = 'none';
                 document.getElementById('mainContainer').style.display = 'block';
                 document.getElementById('musicControl').style.display = 'block';
-                
-                // Putar musik setelah interaksi user
-                music.play().catch(error => {
-                    console.log("Musik diblokir browser, klik tombol kontrol manual.");
-                });
-                
-                // Mulai buat balon
                 setInterval(createBalloon, 1500);
                 makeHearts(10);
             }, 500);
         }
 
-        // Kontrol On/Off Musik Manual
         function toggleMusic() {
             const btn = document.getElementById('musicControl');
-            if (music.paused) {
-                music.play();
-                btn.innerText = '🔊 Musik: ON';
-            } else {
-                music.pause();
-                btn.innerText = '🔇 Musik: OFF';
-            }
+            if (music.paused) { music.play(); btn.innerText = '🔊 Musik: ON'; } 
+            else { music.pause(); btn.innerText = '🔇 Musik: OFF'; }
         }
 
-        // Tiup Lilin
         let candleLit = true;
         function blowCandle() {
             if (candleLit) {
@@ -86,3 +120,47 @@
                 candleLit = false;
                 makeHearts(15);
             } else {
+                document.getElementById('flame').style.display = 'block';
+                document.getElementById('cakeText').innerText = 'Lilinnya nyala lagi! Hehe 🕯️';
+                candleLit = true;
+            }
+        }
+
+        function toggleLetter() {
+            const letter = document.getElementById('letterBox');
+            letter.classList.toggle('open');
+            if(letter.classList.contains('open')) { makeHearts(10); }
+        }
+
+        function createBalloon() {
+            const zone = document.getElementById('balloonZone');
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.left = Math.random() * 85 + 'vw';
+            balloon.style.animationDuration = Math.random() * 3 + 4 + 's'; 
+            balloon.onclick = (e) => { e.stopPropagation(); createPopText(e.clientX, e.clientY, '💥 POP! 🎉'); balloon.remove(); };
+            zone.appendChild(balloon);
+            setTimeout(() => balloon.remove(), 7000);
+        }
+
+        function createPopText(x, y, text) {
+            const pop = document.createElement('div');
+            pop.className = 'heart-pop'; pop.style.left = x + 'px'; pop.style.top = y + 'px'; pop.innerText = text;
+            document.body.appendChild(pop);
+            setTimeout(() => pop.remove(), 1000);
+        }
+
+        function makeHearts(count) {
+            const emojis = ['💖', '❤️', '🌸', '✨', '🥰'];
+            for(let i=0; i<count; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                    createPopText(x, y, emoji);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
