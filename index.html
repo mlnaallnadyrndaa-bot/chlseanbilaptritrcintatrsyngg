@@ -88,23 +88,24 @@
         const music = document.getElementById('bgMusic');
 
         function startSurprise() {
-            music.play().then(() => {
-                lanjutkanKejutan();
-            }).catch(error => {
-                lanjutkanKejutan();
-            });
-        }
+    music.play().then(() => {
+        lanjutkanKejutan();
+    }).catch(error => {
+        lanjutkanKejutan();
+    });
+});
+}
 
-        function melanjutkanKejutan() {
-            document.getElementById('welcomeOverlay').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('welcomeOverlay').style.display = 'none';
-                document.getElementById('mainContainer').style.display = 'block';
-                document.getElementById('musicControl').style.display = 'block';
-                setInterval(createBalloon, 1500);
-                makeHearts(10);
-            }, 500);
-        }
+function melanjutkanKejutan() {
+    document.getElementById('welcomeOverlay').style.opacity = '0';
+    setTimeOut(() => {
+        document.getElementById('welcomeOverlay').style.display = 'none';
+        document.getElementById('mainContainer').style.display = 'block';
+        document.getElementById('musicControl').style.display = 'block';
+        setInterval(createBalloon, 1500);
+        makeHearts(10);
+    }, 500);
+}
 
         function toggleMusic() {
             const btn = document.getElementById('musicControl');
